@@ -36,7 +36,7 @@ public  class ProductRepository : AWSRepositoryBase<IAmazonDynamoDB>, IProductRe
 
 ```
 
-## Handler / domain model
+## Handler / Service
 ### Decalaration:
 `public class YourHandlerHandler : HandlerBase<IYourRepository>`
 
