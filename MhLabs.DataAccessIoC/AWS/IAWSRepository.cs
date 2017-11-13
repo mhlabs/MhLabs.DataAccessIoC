@@ -4,6 +4,5 @@ namespace MhLabs.DataAccessIoC.AWS
 {
     public interface IAWSRepository
     {
-        IResourceResolver ResourceResolver { get; set; }
     }
 }

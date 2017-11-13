@@ -15,7 +15,8 @@ namespace MhLabs.DataAccessIoC.AWS
         /// For example the name of the environment variable containing the table name
         /// </summary>
         protected abstract string AWSResourceKey { get; }
-        public IResourceResolver ResourceResolver { get; set; }
+
+        protected string ResourceName => ResourceResolver.Current.Resolve(AWSResourceKey);
 
     }
 }

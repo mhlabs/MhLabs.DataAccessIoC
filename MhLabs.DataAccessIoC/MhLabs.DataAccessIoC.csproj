@@ -6,9 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="awssdk.core" Version="3.3.18.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.0.0" />
   </ItemGroup>
-
-
 
 </Project>

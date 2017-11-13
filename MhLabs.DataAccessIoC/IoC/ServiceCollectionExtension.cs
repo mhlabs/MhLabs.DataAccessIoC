@@ -9,6 +9,7 @@ using System.Text;
 using Amazon.Runtime;
 using MhLabs.DataAccessIoC.Abstraction;
 using MhLabs.DataAccessIoC.AWS;
+using MhLabs.DataAccessIoC.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MhLabs.DataAccessIoC.IoC
@@ -16,8 +17,10 @@ namespace MhLabs.DataAccessIoC.IoC
     public static class ServiceCollectionExtension
     {
 
-        public static void AddHandlers(this IServiceCollection services, Assembly assembly = null)
+        public static void AddHandlers<TAssemblyType>(this IServiceCollection services, Assembly assembly = null)
         {
+            var assName = typeof(TAssemblyType).GetTypeInfo().Assembly.FullName;
+            assembly = assembly ?? Assembly.Load(new AssemblyName(assName));
             var handlers = GetImplementations(typeof(IHandler), assembly).Where(p => !p.GetTypeInfo().IsAbstract);
             foreach (var handler in handlers)
             {
@@ -37,8 +40,10 @@ namespace MhLabs.DataAccessIoC.IoC
             }
         }
 
-        public static void AddAWSRepositories(this IServiceCollection services, Assembly assembly = null)
+        public static void AddAWSRepositories<TAssemblyType>(this IServiceCollection services, Assembly assembly = null)
         {
+            var assName = typeof(TAssemblyType).GetTypeInfo().Assembly.FullName;
+            assembly = assembly ?? Assembly.Load(new AssemblyName(assName));
             var repos = GetImplementations(typeof(IAWSRepository), assembly).Where(p => !p.GetTypeInfo().IsAbstract);
             foreach (var repo in repos)
             {
@@ -54,15 +59,17 @@ namespace MhLabs.DataAccessIoC.IoC
                     {
                         var args = parameters.Select(p => h.GetService(p.ParameterType));
                         var obj = ctor.Invoke(args.ToArray());
+
                         return obj;
                     }));
             }
-            ;
+
 
         }
 
         private static IEnumerable<Type> GetImplementations(Type interfaceType, Assembly assembly)
         {
+
             var ass = assembly ?? Assembly.GetEntryAssembly();
             foreach (var ti in ass.DefinedTypes)
             {
