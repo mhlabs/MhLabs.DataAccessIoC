@@ -16,11 +16,15 @@ namespace MhLabs.DataAccessIoC.IoC
 {
     public static class ServiceCollectionExtension
     {
-
-        public static void AddHandlers<TAssemblyType>(this IServiceCollection services, Assembly assembly = null)
+        public static void AddHandlers<TAssemblyType>(this IServiceCollection services)
         {
             var assName = typeof(TAssemblyType).GetTypeInfo().Assembly.FullName;
-            assembly = assembly ?? Assembly.Load(new AssemblyName(assName));
+            
+            AddHandlers(services, Assembly.Load(new AssemblyName(assName)));
+        }
+
+        public static void AddHandlers(this IServiceCollection services, Assembly assembly)
+        {
             var handlers = GetImplementations(typeof(IHandler), assembly).Where(p => !p.GetTypeInfo().IsAbstract);
             foreach (var handler in handlers)
             {
@@ -40,10 +44,15 @@ namespace MhLabs.DataAccessIoC.IoC
             }
         }
 
-        public static void AddAWSRepositories<TAssemblyType>(this IServiceCollection services, Assembly assembly = null)
+        public static void AddAWSRepositories<TAssemblyType>(this IServiceCollection services)
         {
             var assName = typeof(TAssemblyType).GetTypeInfo().Assembly.FullName;
-            assembly = assembly ?? Assembly.Load(new AssemblyName(assName));
+            var assembly = Assembly.Load(new AssemblyName(assName));
+            AddAWSRepositories(services, assembly);
+        }
+
+        public static void AddAWSRepositories(this IServiceCollection services, Assembly assembly)
+            {
             var repos = GetImplementations(typeof(IAWSRepository), assembly).Where(p => !p.GetTypeInfo().IsAbstract);
             foreach (var repo in repos)
             {
