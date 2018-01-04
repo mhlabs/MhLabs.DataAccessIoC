@@ -72,8 +72,8 @@ Startup.cs:
             awsOptions.Region = RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_DEFAULT_REGION"));
             services.AddDefaultAWSOptions(awsOptions);
             services.AddAWSService<IAmazonDynamoDB>();
-            services.AddAWSRepositories();
-            services.AddHandlers();
+            services.AddAWSRepositories<Startup>();
+            services.AddHandlers<Startup>();
             [...]
         }
 ```
