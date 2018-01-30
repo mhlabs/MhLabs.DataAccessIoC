@@ -11,20 +11,20 @@ namespace MhLabs.DataAccessIoC.Xunit
 {
     public abstract class HandlerTestBase<THandler>
     {
-        private IServiceCollection Services;
-        private IServiceProvider _serviceProvider;
+        private readonly IServiceCollection _services;
+        private readonly IServiceProvider _serviceProvider;
 
         protected HandlerTestBase()
         {
-            Services = new ServiceCollection();
+            _services = new ServiceCollection();
             var assName = typeof(THandler).AssemblyQualifiedName.Split(' ')[1].Trim(',');
             var assembly = Assembly.Load(new AssemblyName(assName));
-            Services.AddHandlers(assembly);
-            Services.AddRepositoryMocks(assembly);
-           _serviceProvider = Services.BuildServiceProvider();
+            _services.AddHandlers(assembly);
+            _services.AddRepositoryMocks(assembly);
+           _serviceProvider = _services.BuildServiceProvider();
         }
 
-        private Mock<T> GetMock<T>() where T : class
+        protected Mock<T> GetMock<T>() where T : class
         {            
             return _serviceProvider.GetService<Mock<T>>();
         }
