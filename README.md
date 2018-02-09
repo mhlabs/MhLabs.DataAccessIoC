@@ -7,7 +7,7 @@ Usage:
 `Install-Package MhLabs.DataAccessIoc`
 
 ## Repository
-### Declarations: 
+### Declarations:
 ### AWS repository
 `public  class YourRepository : AWSRepositoryBase<IAWSDataStoreType>, IYourRepository` where `IAWSDataStoreType` is derived from `IAmazonServcie`
 
@@ -30,7 +30,7 @@ public  class ProductRepository : AWSRepositoryBase<IAmazonDynamoDB>, IProductRe
 
         public async Task<Product> GetAsync(string id)
         {
-            return (await _dynamoDbContext.QueryAsync<Product>(id).GetRemainingAsync()).FirstOrDefault();
+            return await _dynamoDbContext.LoadAsync<Product>(id, new DynamoDBOperationConfig { OverrideTableName = ResourceName });
         }
 }
 
@@ -48,12 +48,12 @@ public  class ProductRepository : AWSRepositoryBase<IAmazonDynamoDB>, IProductRe
 
         public ProductHandler(IProductRepository repository) : base(repository)
         { }
-        
+
         public async Task<Product> AddProductAsync(string id)
         {
             return await Repository.AddAsync(id);
         }
-        
+
         public async Task<Product> GetProductAsync(string id)
         {
             return await Repository.GetAsync(id);
