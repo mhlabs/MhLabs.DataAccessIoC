@@ -18,14 +18,14 @@ public  class ProductRepository : AWSRepositoryBase<IAmazonDynamoDB>, IProductRe
         public ProductRepository(IAmazonDynamoDB dataAccessClient) : base(dataAccessClient)
         {
             // We let AWS generate resoucre names, so we override the table name here instead of using the type name of the entity
-            _dynamoDbContext = new DynamoDBContext(DataAccessClient, new DynamoDBOperationConfig { OverrideTableName = ResourceName });
+            _dynamoDbContext = new DynamoDBContext(DataAccessClient);
         }
 
         protected override string AWSResourceKey => "ProductTable";  // <-- the key with which to resolve table name. Typically the name of an environment variable that holds the table name
 
         public async Task AddAsync(Product product)
         {
-            await _dynamoDbContext.SaveAsync(product);
+            await _dynamoDbContext.SaveAsync(product, new DynamoDBOperationConfig { OverrideTableName = ResourceName });
         }
 
         public async Task<Product> GetAsync(string id)
@@ -49,9 +49,9 @@ public  class ProductRepository : AWSRepositoryBase<IAmazonDynamoDB>, IProductRe
         public ProductHandler(IProductRepository repository) : base(repository)
         { }
 
-        public async Task<Product> AddProductAsync(string id)
+        public async Task AddProductAsync(Product product)
         {
-            return await Repository.AddAsync(id);
+            return await Repository.AddAsync(product);
         }
 
         public async Task<Product> GetProductAsync(string id)
