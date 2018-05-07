@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MhLabs.DataAccessIoC", "MhLabs.DataAccessIoC\MhLabs.DataAccessIoC.csproj", "{456065A6-6625-49CD-9308-B13323BF2849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MhLabs.DataAccessIoC", "MhLabs.DataAccessIoC\MhLabs.DataAccessIoC.csproj", "{456065A6-6625-49CD-9308-B13323BF2849}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MhLabs.DataAccessIoC.Xunit", "MhLabs.DataAccessIoC.Xunit\MhLabs.DataAccessIoC.Xunit.csproj", "{CA08D6DA-8ED1-4571-9BC5-8A0B73AC12DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MhLabs.DataAccessIoC.Tests", "MhLabs.DataAccessIoc.Tests\MhLabs.DataAccessIoC.Tests.csproj", "{64C2EEA5-8FB9-454E-9451-8701226F4F8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{CA08D6DA-8ED1-4571-9BC5-8A0B73AC12DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA08D6DA-8ED1-4571-9BC5-8A0B73AC12DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA08D6DA-8ED1-4571-9BC5-8A0B73AC12DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64C2EEA5-8FB9-454E-9451-8701226F4F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64C2EEA5-8FB9-454E-9451-8701226F4F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64C2EEA5-8FB9-454E-9451-8701226F4F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64C2EEA5-8FB9-454E-9451-8701226F4F8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0441638-7EAD-4348-8E79-2211197DECF7}
 	EndGlobalSection
 EndGlobal

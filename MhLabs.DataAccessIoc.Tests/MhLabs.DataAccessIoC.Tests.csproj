@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MhLabs.DataAccessIoC\MhLabs.DataAccessIoC.csproj" />
-    <ProjectReference Include="..\model_project\model_project.csproj" />
   </ItemGroup>
 
 </Project>
