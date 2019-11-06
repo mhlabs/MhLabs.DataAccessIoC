@@ -28,12 +28,12 @@ namespace MhLabs.DataAccessIoC.Xunit.IoC
                     services.AddSingleton(mock.GetType(), h => mock);
                     services.AddSingleton(i, h => mock?.Object);
                 });
-            }            
+            }
         }
 
         private static IEnumerable<Type> GetImplementations(Type interfaceType, Assembly assembly)
         {
-            var ass = assembly.DefinedTypes;                
+            var ass = assembly.DefinedTypes;
             foreach (var ti in ass)
             {
                 if (ti.ImplementedInterfaces.Contains(interfaceType))
