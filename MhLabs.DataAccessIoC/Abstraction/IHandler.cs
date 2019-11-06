@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MhLabs.DataAccessIoC.Abstraction
+﻿namespace MhLabs.DataAccessIoC.Abstraction
 {
     public interface IHandler
     {

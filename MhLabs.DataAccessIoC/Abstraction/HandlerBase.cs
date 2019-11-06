@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Amazon.Runtime;
-using MhLabs.DataAccessIoC.AWS;
-
-namespace MhLabs.DataAccessIoC.Abstraction
+﻿namespace MhLabs.DataAccessIoC.Abstraction
 {
     public abstract class HandlerBase<T> : IHandler
     {

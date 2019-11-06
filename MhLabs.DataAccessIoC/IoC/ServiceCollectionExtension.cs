@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net.Http;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using Amazon.Runtime;
 using MhLabs.DataAccessIoC.Abstraction;
 using MhLabs.DataAccessIoC.AWS;
-using MhLabs.DataAccessIoC.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MhLabs.DataAccessIoC.IoC
@@ -19,7 +13,7 @@ namespace MhLabs.DataAccessIoC.IoC
         public static void AddHandlers<TAssemblyType>(this IServiceCollection services)
         {
             var assName = typeof(TAssemblyType).GetTypeInfo().Assembly.FullName;
-            
+
             AddHandlers(services, Assembly.Load(new AssemblyName(assName)));
         }
 
