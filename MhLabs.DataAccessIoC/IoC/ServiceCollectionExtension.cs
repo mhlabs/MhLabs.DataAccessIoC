@@ -27,13 +27,12 @@ namespace MhLabs.DataAccessIoC.IoC
                 {
                     throw new ArgumentException("An autowired handler needs exactly one constructor");
                 }
-                var ctor = ctors.First();
+                var ctor = ctors[0];
                 var parameters = ctor.GetParameters();
                 services.AddSingleton(handler, h =>
                 {
                     var args = parameters.Select(p => h.GetService(p.ParameterType));
-                    var obj = ctor.Invoke(args.ToArray());
-                    return obj;
+                    return ctor.Invoke(args.ToArray());
                 });
             }
         }
@@ -46,7 +45,7 @@ namespace MhLabs.DataAccessIoC.IoC
         }
 
         public static void AddAWSRepositories(this IServiceCollection services, Assembly assembly)
-            {
+        {
             var repos = GetImplementations(typeof(IAWSRepository), assembly).Where(p => !p.GetTypeInfo().IsAbstract);
             foreach (var repo in repos)
             {
@@ -55,24 +54,22 @@ namespace MhLabs.DataAccessIoC.IoC
                 {
                     throw new ArgumentException("An autowired repository needs exactly one constructor");
                 }
-                var ctor = ctors.First();
+                var ctor = ctors[0];
                 var parameters = ctor.GetParameters();
-                repo.GetInterfaces().ToList().ForEach(i =>
+                foreach (var i in repo.GetInterfaces())
+                {
                     services.AddSingleton(i, h =>
                     {
                         var args = parameters.Select(p => h.GetService(p.ParameterType));
-                        var obj = ctor.Invoke(args.ToArray());
 
-                        return obj;
-                    }));
+                        return ctor.Invoke(args.ToArray());
+                    });
+                }
             }
-
-
         }
 
         private static IEnumerable<Type> GetImplementations(Type interfaceType, Assembly assembly)
         {
-
             var ass = assembly ?? Assembly.GetEntryAssembly();
             foreach (var ti in ass.DefinedTypes)
             {
@@ -89,6 +86,5 @@ namespace MhLabs.DataAccessIoC.IoC
                 .Where(ci => ci.GetParameters().Length == 1)
                 .Where(ci => baseParameterType.IsAssignableFrom(ci.GetParameters().First().ParameterType));
         }
-
     }
 }
