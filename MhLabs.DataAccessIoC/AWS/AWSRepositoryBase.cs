@@ -2,7 +2,7 @@
 using MhLabs.DataAccessIoC.Resolvers;
 namespace MhLabs.DataAccessIoC.AWS
 {
-    public abstract class AWSRepositoryBase<T> : IAWSRepository where T : IAmazonService 
+    public abstract class AWSRepositoryBase<T> : IAWSRepository where T : IAmazonService
     {
         protected AWSRepositoryBase(T dataAccessClient)
         {
@@ -17,6 +17,5 @@ namespace MhLabs.DataAccessIoC.AWS
         protected abstract string AWSResourceKey { get; }
 
         protected string ResourceName => ResourceResolver.Current.Resolve(AWSResourceKey);
-
     }
 }
